@@ -46,7 +46,7 @@ int main() {
 	// IP address, and port of the server to be connected to.
 	sockaddr_in clientService;
 	clientService.sin_family = AF_INET;
-	inet_pton(clientService.sin_family, "172.30.154.7", &clientService.sin_addr);
+	inet_pton(clientService.sin_family, "127.0.0.1", &clientService.sin_addr);
 	clientService.sin_port = htons(3000);
 
 	//----------------------
