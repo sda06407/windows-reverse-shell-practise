@@ -129,7 +129,7 @@ int main(int argc, char* argv[])
 {
     char buf[1024] = {0};
     SSL_library_init();
-    char hostname[] = "172.23.137.86"; // change this
+    char hostname[] = "127.0.0.1"; // change this
     char portnum[] = "3000"; // change this
 
     SSL_CTX* ctx = InitCTX();
