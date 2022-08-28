@@ -105,7 +105,7 @@ void execute(SSL* ssl, char* cmdline) {
 
     FILE* pipe;
     const char* endstring = " 2>&1";
-    strncat(cmdline, endstring, sizeof(endstring));
+    strncat(cmdline, endstring, strlen(endstring));
     pipe = _popen(cmdline, "r");
     char buffer[128] = {0};
     
